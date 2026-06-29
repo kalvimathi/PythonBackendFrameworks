@@ -1,369 +1,169 @@
-# Hands-On 1: Web Framework Foundations and Django Project Setup
+# Hands-On 1 – Django Project Setup and URL Routing
 
 ## Overview
 
-This hands-on exercise introduces the fundamental concepts of web frameworks and the Django framework. The objective is to understand the request-response lifecycle, middleware architecture, WSGI and ASGI interfaces, MVC/MVT design patterns, and create a basic Django application with a working API endpoint.
+This hands-on introduces the fundamentals of Django by creating a new project and application, configuring URL routing, and implementing basic views. It demonstrates the structure of a Django project and how HTTP requests are handled.
 
 ---
 
-## Learning Objectives
+## Objectives
 
-By completing this hands-on exercise, the following concepts are demonstrated:
-
-* Understanding the web request-response lifecycle
-* Understanding the role of middleware in Django
-* Comparing WSGI and ASGI application interfaces
-* Understanding the MVC and Django MVT architectural patterns
-* Setting up a Django project and application
-* Configuring URL routing
-* Creating and executing a basic Django view
-* Running and testing a Django development server
+- Install and configure Django.
+- Create a Django project and application.
+- Understand Django project structure.
+- Configure URL routing.
+- Implement function-based views.
+- Run and test the Django development server.
 
 ---
 
-# Task 1: Web Framework Fundamentals
+## Technologies Used
 
-## 1. Request-Response Cycle in Django
+- Python 3.13
+- Django 6.x
+- SQLite3
+- Visual Studio Code
 
-The request-response cycle describes how a client request is processed by a Django application.
+---
 
-### Flow
+## Project Structure
 
-```text
-Client (Browser/Postman)
-        │
-        ▼
-URL Router (urls.py)
-        │
-        ▼
-View Function/Class
-        │
-        ▼
-Model Layer (Database Interaction)
-        │
-        ▼
-Response Object
-        │
-        ▼
-Client
+```
+handson_01/
+│
+├── coursemanager/
+│   ├── settings.py
+│   ├── urls.py
+│   └── ...
+│
+├── courses/
+│   ├── views.py
+│   ├── urls.py
+│   ├── models.py
+│   └── ...
+│
+├── manage.py
+├── requirements.txt
+└── README.md
 ```
 
-### Explanation
+---
 
-1. The client sends an HTTP request.
-2. Django URL dispatcher identifies the matching route.
-3. The associated view function is executed.
-4. The view may interact with models and the database.
-5. A response is generated.
-6. The response is returned to the client.
+# Task 1 – Django Project Setup
+
+## Description
+
+Created a Django project named **coursemanager** and an application named **courses**.
+
+### Activities Performed
+
+- Installed Django
+- Created a Django project
+- Created a Django application
+- Configured project settings
+- Started the development server
 
 ---
 
-## 2. Middleware in Django
+# Task 2 – URL Routing
 
-Middleware components process requests and responses globally across the application.
+## Description
 
-### SecurityMiddleware
+Configured URL routing between the project and application.
 
-Purpose:
+### Activities Performed
 
-* Provides security enhancements.
-* Helps enforce HTTPS.
-* Adds security-related HTTP headers.
-
-Benefits:
-
-* Protects against common web vulnerabilities.
-* Improves application security.
-
-### SessionMiddleware
-
-Purpose:
-
-* Manages user sessions.
-* Stores and retrieves session data.
-* Enables user authentication and tracking.
-
-Benefits:
-
-* Maintains user state between requests.
-* Supports login sessions and personalized experiences.
+- Created application URLs
+- Connected application URLs to project URLs
+- Configured route mapping
+- Verified URL navigation
 
 ---
 
-## 3. WSGI vs ASGI
+# Task 3 – Function-Based Views
 
-### WSGI (Web Server Gateway Interface)
+## Description
 
-Characteristics:
+Implemented simple function-based views to return HTTP responses.
 
-* Synchronous request handling.
-* Suitable for traditional web applications.
-* Widely supported by web servers.
+### Features Implemented
 
-Use Cases:
-
-* Standard CRUD applications.
-* Traditional Django deployments.
-
-### ASGI (Asynchronous Server Gateway Interface)
-
-Characteristics:
-
-* Supports asynchronous programming.
-* Handles WebSockets and long-lived connections.
-* Enables real-time communication.
-
-Use Cases:
-
-* Chat applications.
-* Live notifications.
-* Real-time dashboards.
-* Streaming services.
-
-### Comparison
-
-| Feature                       | WSGI        | ASGI         |
-| ----------------------------- | ----------- | ------------ |
-| Processing                    | Synchronous | Asynchronous |
-| WebSockets                    | No          | Yes          |
-| Real-Time Support             | Limited     | Excellent    |
-| Performance Under Concurrency | Moderate    | High         |
+- Home page view
+- About page view
+- Course page view
 
 ---
 
-## 4. MVC vs Django MVT Architecture
+## Testing
 
-### Traditional MVC Pattern
-
-| MVC Component | Responsibility         |
-| ------------- | ---------------------- |
-| Model         | Data Layer             |
-| View          | User Interface         |
-| Controller    | Request Handling Logic |
-
-### Django MVT Pattern
-
-| MVT Component | Responsibility             |
-| ------------- | -------------------------- |
-| Model         | Database and Business Data |
-| View          | Application Logic          |
-| Template      | User Interface             |
-
-### MVC to MVT Mapping
-
-| MVC        | Django MVT |
-| ---------- | ---------- |
-| Model      | Model      |
-| View       | Template   |
-| Controller | View       |
+Verified the application by running the Django development server and accessing all configured URLs in the browser.
 
 ---
 
-# Task 2: Django Project Setup
+## Packages Used
 
-## Objective
-
-Create a Django project named **coursemanager** and an application named **courses**. Configure URL routing and expose a simple API endpoint.
+```
+Django
+```
 
 ---
 
-## Project Creation
+## Installation
 
-### Create Virtual Environment
+Clone the repository
+
+```bash
+git clone https://github.com/kalvimathi/PythonBackendFrameworks.git
+```
+
+Navigate to the project
+
+```bash
+cd PythonBackendFrameworks/kalvimathi/handson_01
+```
+
+Create virtual environment
 
 ```bash
 python -m venv venv
 ```
 
-### Activate Virtual Environment
+Activate virtual environment
+
+### Windows
 
 ```bash
 venv\Scripts\activate
 ```
 
-### Install Django
+Install dependencies
 
 ```bash
-pip install django
+pip install -r requirements.txt
 ```
 
-### Create Django Project
-
-```bash
-django-admin startproject coursemanager .
-```
-
-### Create Django Application
-
-```bash
-python manage.py startapp courses
-```
-
----
-
-## Application Configuration
-
-### Register Application
-
-The `courses` application was added to:
-
-```python
-INSTALLED_APPS
-```
-
-inside:
-
-```python
-coursemanager/settings.py
-```
-
----
-
-## Creating a Basic View
-
-A simple view was implemented to verify application functionality.
-
-### views.py
-
-```python
-from django.http import HttpResponse
-
-def hello_view(request):
-    return HttpResponse("Course Management API is running")
-```
-
----
-
-## URL Configuration
-
-### courses/urls.py
-
-```python
-from django.urls import path
-from .views import hello_view
-
-urlpatterns = [
-    path('hello/', hello_view),
-]
-```
-
-### project urls.py
-
-```python
-from django.contrib import admin
-from django.urls import path, include
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('courses.urls')),
-]
-```
-
----
-
-## Database Migration
-
-```bash
-python manage.py migrate
-```
-
-This command creates the default Django database tables.
-
----
-
-## Running the Application
+Run the server
 
 ```bash
 python manage.py runserver
 ```
 
-The development server starts at:
+---
 
-```text
-http://127.0.0.1:8000/
-```
+## Learning Outcomes
+
+After completing this hands-on, the following concepts were understood:
+
+- Django project architecture
+- Django applications
+- URL routing
+- Function-based views
+- Django development server
 
 ---
 
-## Testing the Endpoint
+## Author
 
-### Endpoint
+**Kalvimathi**
 
-```text
-http://127.0.0.1:8000/api/hello/
-```
-
-### Expected Response
-
-```text
-Course Management API is running
-```
-
----
-
-# Project Structure
-
-```text
-handson_01/
-│
-├── README.md
-├── notes.py
-├── requirements.txt
-├── manage.py
-│
-├── coursemanager/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   ├── asgi.py
-│   └── wsgi.py
-│
-└── courses/
-    ├── __init__.py
-    ├── admin.py
-    ├── apps.py
-    ├── models.py
-    ├── urls.py
-    ├── views.py
-    └── migrations/
-```
-
----
-
-# Requirements
-
-```text
-Django
-```
-
-Generate requirements file:
-
-```bash
-pip freeze > requirements.txt
-```
-
----
-
-# Outcome
-
-Successfully completed:
-
-✅ Task 1 – Web Framework Fundamentals
-
-* Request-Response Cycle
-* Middleware Concepts
-* WSGI vs ASGI
-* MVC vs Django MVT
-
-✅ Task 2 – Django Project Setup
-
-* Django Installation
-* Project Creation
-* Application Creation
-* URL Routing Configuration
-* Basic View Implementation
-* Development Server Execution
-* Endpoint Verification
-
-This hands-on provides a foundational understanding of Django architecture and project setup, preparing for advanced topics such as Models, ORM, Admin Interface, and REST APIs in subsequent exercises.
+Python Backend Frameworks – Hands-On 1
